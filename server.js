@@ -133,7 +133,7 @@ app.post('/inscription', (req, res) => {
     }
     
     // Ajoute le nouveau user à la table User avec points initialisé à 0
-    db.run('INSERT INTO Users (username, password, points) VALUES (?, ?, 0)', [username, password], function (err) {
+    db.run('INSERT INTO Users (username, password, points) VALUES (?, ?, 1)', [username, password], function (err) {
         if (err) {
             console.error('Error inscription:', err.message);
             res.status(500).json({ error: 'Internal server error' });
