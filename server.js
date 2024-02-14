@@ -107,6 +107,29 @@ app.put('/users/:userID/points/:NewPoints', (req, res) => {
     });
 });
 
+app.put('/users/:userID/points/:morepoints', (req, res) => {
+    const {userID, morepoints} = req.params;
+
+    const updateQuery = `UPDATE Users SET points = ? WHERE user_ID = ?`;
+    const updateParams = [ morepoints, userID ];
+
+    db.run(updateQuery, updateParams, function (err) {
+      if (err) {
+        console.error('Error updating instruction step:', err.message);
+        res.status(500).json({ error: 'Internal server error' });
+        return;
+      }
+  
+      if (this.changes === 0) {
+        // No rows were affected, indicating that the instruction step or recipe was not found
+        res.status(404).json({ error: 'User not found' });
+      } else {
+        // Instruction step updated successfully
+        res.json({ message: 'Points added successfully' });
+      }
+    });
+});
+
 // Add an achievement
 app.post('/users/:userID/achievement/:Name', (req, res) => {
     const { userID, Name } = req.params;
