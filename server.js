@@ -8,7 +8,7 @@ const app = express();
 const port = 4000;
 
 const corsOptions = {
-  origin: 'https://projet-s6.onrender.com',
+  origin: 'https://projet-s6.arnaut-vasseur.com',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 204,
